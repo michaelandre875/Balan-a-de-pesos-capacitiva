@@ -1,0 +1,126 @@
+#include <Keypad.h>      //Biblioteca do teclado
+#define OUTPUT_PIN 7    // PWM sinal de saida pino
+
+const byte qtdLinhas = 4;   //Qtd de linhas
+const byte qtdColunas = 4; //Qtd de colunas
+
+boolean inicio = 0;       //Variaveis de controle
+boolean controle = 0;
+
+//Matriz de caracteres
+char matriz_teclas[qtdLinhas][qtdColunas] = {  // Definindo os botões da matriz
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+ 
+byte PinosqtdLinhas[qtdLinhas] = {3, 4, 5, 6};     //Pinos linhas
+byte PinosqtdColunas[qtdColunas] = {8, 9, 10,11}; //Pinos colunas
+ 
+//Inicializa teclado
+Keypad meuteclado = Keypad( makeKeymap(matriz_teclas), PinosqtdLinhas, PinosqtdColunas, qtdLinhas, qtdColunas); 
+ 
+void setup(){
+  Serial.begin(9600);      //Inicializando a serial
+  Serial.println("Aperte uma tecla..."); 
+  Serial.println();   
+}
+  
+void loop(){
+  char tecla_pressionada = meuteclado.getKey(); 
+  //digitalWrite(24, HIGH);
+  //delay(1000);
+  //digitalWrite(24,LOW);
+  //delay(1000);
+  
+  if (tecla_pressionada){                    //Verifica se alguma tecla foi pressionada
+  Serial.print("Tecla pressionada : "); 
+  Serial.println(tecla_pressionada); 
+
+  switch(tecla_pressionada){      //Switch para verificar qual botão foi pressionado
+    
+  case '1':                      //50 ms
+  if(controle == 0){            //funcao criada para permitir  a execução do codigo apenas uma vez
+  inicio = 1; controle = 1; }  
+  if(inicio == 1 && controle == 1){ 
+  Serial.println("Tecla 1 pressionada - 50ms"); 
+  digitalWrite(7,HIGH);
+  delay(50);
+  digitalWrite(7,LOW);
+  }//inicio=0; 
+  break; 
+  
+  case '2':                      //100 ms
+  if(controle == 0){            //funcao criada para permitir  a execução do codigo apenas uma vez
+  inicio = 1; controle = 1; }  
+  if(inicio ==1 && controle==1){ 
+  Serial.println("Tecla 2 pressionada - 100ms"); 
+  digitalWrite(7,HIGH);
+  delay(100);
+  digitalWrite(7,LOW);
+  }//inicio=0;
+  break;
+  
+  case '3':                      //150 ms
+  if(controle == 0){            //funcao criada para permitir  a execução do codigo apenas uma vez
+  inicio = 1; controle = 1; }  
+  if(inicio == 1 && controle == 1){   
+  Serial.println("Tecla 3 pressionada - 150ms"); 
+  digitalWrite(7,HIGH);
+  delay(150);
+  digitalWrite(7,LOW);
+  }//inicio=0;
+  break;
+  
+  case '4':                      //200 ms
+  if(controle == 0){            //funcao criada para permitir  a execução do codigo apenas uma vez
+  inicio = 1; controle = 1; }  
+  if(inicio == 1 && controle == 1){
+  Serial.println("Tecla 4 pressionada - 200ms"); 
+  digitalWrite(7,HIGH);
+  delay(200);
+  digitalWrite(7,LOW);
+  }//inicio=0;
+  break;
+  
+  case '5':                      //250 ms
+  if(controle == 0){            //funcao criada para permitir  a execução do codigo apenas uma vez
+  inicio = 1; controle = 1; }  
+  if(inicio == 1 && controle == 1){
+  Serial.println("Tecla 5 pressionada - 250ms"); 
+  digitalWrite(7,HIGH);
+  delay(250);
+  digitalWrite(7,LOW);
+  }//inicio=0;
+  break;
+  
+  case '6':                     //300 ms
+  if(controle == 0){            //funcao criada para permitir  a execução do codigo apenas uma vez
+  inicio = 1; 
+  controle = 1; }  
+  if(inicio == 1 && controle == 1){
+  Serial.println("Tecla 6 pressionada - 300ms"); 
+  digitalWrite(7,HIGH);
+  delay(300);
+  digitalWrite(7,LOW);
+  }//inicio=0;
+  break;
+  
+  case '7':                     //350 ms
+  if(controle == 0){            //funcao criada para permitir  a execução do codigo apenas uma vez
+  inicio = 1; 
+  controle = 1; }  
+  if(inicio == 1 && controle == 1){
+  Serial.println("Tecla 7 pressionada - 350ms"); 
+  digitalWrite(7,HIGH);
+  delay(350);
+  digitalWrite(7,LOW);
+  }//inicio=0;
+  break;
+  
+  default:
+  Serial.println(tecla_pressionada);  
+  }
+ }
+}
