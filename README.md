@@ -1,1 +1,0 @@
-# Balan-a-de-pesos-capacitiva
